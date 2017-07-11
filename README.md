@@ -41,3 +41,4 @@ Lecture List
 - BT001 Intro, Notes & Assets
 - BT002 Game Design Document (GDD)
 - BT003 Creating & Deleting Landscapes
+- BT004
