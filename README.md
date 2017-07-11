@@ -37,6 +37,7 @@ What assets are needed? Think 3D art, 2D art, sound effects & music. For example
 
 And it can literally be as simple as that for now! So, there's really no reason not to write a really simple GDD for your next game!
 
-#Lecture List
-BT001 Intro, Notes & Assets
-BT002 Game Design Document (GDD)
+Lecture List
+- BT001 Intro, Notes & Assets
+- BT002 Game Design Document (GDD)
+- BT003 Creating & Deleting Landscapes
