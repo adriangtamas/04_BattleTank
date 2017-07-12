@@ -27,6 +27,8 @@ private:
 
 	//return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation);
+
+	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection);
 	
 	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5f;
