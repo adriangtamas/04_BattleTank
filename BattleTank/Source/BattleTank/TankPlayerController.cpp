@@ -35,18 +35,17 @@ void ATankPlayerController::AimTowardsCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
-	FVector HitLocation; //OUT parameter
+	FVector HitLocation; //s parameter
 	if (GetSightRayHitLocation(HitLocation)) //Has "side-effect", is going to line trace
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *(HitLocation.ToString()))
+		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *(HitLocation.ToString()))
 		//TODO Tell controlled tank to aim at this point
 	}
-
 
 }
 
 //Get world location of linetrace though crosshair, true if hits landscape
-bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation)
+bool ATankPlayerController::GetSightRayHitLocation(FVector& HitLocation)
 {
 	// Find the crosshair position
 	int32 ViewportSizeX, ViewportSizeY;
@@ -57,11 +56,29 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation)
 	FVector LookDirection;
 	if (GetLookDirection(ScreenLocation, LookDirection))
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *(LookDirection.ToString()))
+		//UE_LOG(LogTemp, Warning, TEXT("Look direction: %s"), *(LookDirection.ToString()))
+			// Linetrace along the look direction and see what we hit (up to max range)
+		return GetLookVectorHitLocation(LookDirection, HitLocation);
 	}
+	else { return false; }
+}
 
-	// Linetrace along the look direction and see what we hit (up to max range)
-	return true;
+bool ATankPlayerController::GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation)
+{
+	FHitResult HitResult;
+	auto StartLocation = PlayerCameraManager->GetCameraLocation();
+	auto EndLocation = StartLocation + (LookDirection * LineTraceRange);
+	if (GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility))
+	{
+		HitLocation = HitResult.Location;
+		return true;
+	}
+	else 
+	{ 
+		UE_LOG(LogTemp, Warning, TEXT("Line trace didn't succeed"))
+		HitLocation = FVector(0);
+		return false; 
+	}// 
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection)
