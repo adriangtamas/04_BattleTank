@@ -15,7 +15,7 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
-public:
+private:
 	void BeginPlay() override;
 
 	void Tick(float DeltaTime) override;
@@ -28,4 +28,9 @@ public:
 	//return an OUT parameter, true if hit landscape
 	bool GetSightRayHitLocation(FVector& OutHitLocation);
 	
+	UPROPERTY(EditAnywhere)
+	float CrosshairXLocation = 0.5f;
+
+	UPROPERTY(EditAnywhere)
+	float CrosshairYLocation = 0.33333f;
 };
