@@ -1,3 +1,5 @@
+Content/BattleGround_Hi.umap
+
 # Visual Studio 2015 user specific files
 .vs/
 
@@ -53,6 +55,9 @@ Binaries/*
 
 # Builds
 Build/*
+
+# Starter Content
+Content/StarterContent/*
 
 # Whitelist PakBlacklist-<BuildConfiguration>.txt files
 !Build/*/
